@@ -13,6 +13,7 @@ const SearchInput = ({ value, onChange, handleSearch }: SearchInputProps) => (
       className="w-48 h-9 px-2 rounded-s-xl text-black outline-none"
       value={value}
       onChange={(e) => onChange(e.target.value)}
+      onKeyUp={(e) => e.key === "Enter" && handleSearch()}
     />
     <div className="w-10 flex justify-center items-center rounded-e-xl bg-white">
       <Image
