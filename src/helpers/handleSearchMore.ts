@@ -33,6 +33,7 @@ const handleSearchMore = async (
     setNextUrl(data.next);
     setLoading(false);
     setFunction(combinedData);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   } catch (error) {
     setLoading(false);
     setError((error as Error).message);
