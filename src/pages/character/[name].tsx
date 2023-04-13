@@ -61,7 +61,7 @@ const CharacterPage = ({ name }: CharacterPageProps) => {
 
   return (
     <>
-      <header className="mb-10 font-bak text-5xl md:text-7xl text-center select-none">
+      <header className="mb-10 font-bak text-5xl md:text-7xl text-center select-none text-white">
         {name}
       </header>
       <MoviesList movies={movies} loading={loading} error={error} />
