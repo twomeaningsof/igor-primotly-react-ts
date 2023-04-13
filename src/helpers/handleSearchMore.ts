@@ -3,16 +3,19 @@ import { Character } from "./getFilteredCharacterData";
 import getFilteredCharacterData from "./getFilteredCharacterData";
 import { FilteredCharacter } from "@/pages";
 
-const handleInitialSearch = async (
+const handleSearchMore = async (
+  url: string | null,
+  characters: FilteredCharacter[],
   setFunction: (data: FilteredCharacter[]) => void,
   setLoading: Dispatch<SetStateAction<boolean>>,
   setError: Dispatch<SetStateAction<string>>,
   setNextUrl: Dispatch<SetStateAction<string>>
 ) => {
+  if (url === null) return;
   setLoading(true);
-
+  console.log("im in");
   try {
-    const response = await fetch(`https://swapi.dev/api/people/`);
+    const response = await fetch(url);
 
     if (!response.ok) throw new Error("Not found / response not ok");
 
@@ -25,13 +28,15 @@ const handleInitialSearch = async (
       )
     );
 
+    const combinedData = [...characters, ...filteredData];
+
     setNextUrl(data.next);
     setLoading(false);
-    setFunction(filteredData);
+    setFunction(combinedData);
   } catch (error) {
     setLoading(false);
     setError((error as Error).message);
   }
 };
 
-export default handleInitialSearch;
+export default handleSearchMore;

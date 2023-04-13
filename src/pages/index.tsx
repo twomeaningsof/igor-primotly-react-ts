@@ -4,6 +4,7 @@ import { Character } from "../helpers/getFilteredCharacterData";
 import CharacterList from "@/components/CharactersList";
 import SearchInput from "@/components/Search";
 import handleInitialSearch from "@/helpers/handleInitialSearch";
+import handleSearchMore from "@/helpers/handleSearchMore";
 
 export type FilteredCharacter = Pick<Character, "name"> & {
   homeworld: string;
@@ -13,6 +14,7 @@ export type FilteredCharacter = Pick<Character, "name"> & {
 export default function Home() {
   const [characters, setCharacters] = useState<FilteredCharacter[]>([]);
   const [characterFilter, setCharacterFilter] = useState("");
+  const [nextUrl, setNextUrl] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -26,13 +28,7 @@ export default function Home() {
 
       if (!response.ok) throw new Error("Not found / response not ok");
 
-      let data = await response.json();
-
-      while (data.next) {
-        const response = await fetch(data.next);
-        const nextData = await response.json();
-        data = { ...nextData, results: [...data.results, ...nextData.results] };
-      }
+      const data = await response.json();
 
       const filteredData = await Promise.all(
         data.results.map(
@@ -41,6 +37,7 @@ export default function Home() {
         )
       );
 
+      setNextUrl(data.next);
       setLoading(false);
       setCharacters(filteredData);
     } catch (error) {
@@ -50,7 +47,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    handleInitialSearch(setCharacters, setLoading, setError);
+    handleInitialSearch(setCharacters, setLoading, setError, setNextUrl);
   }, []);
 
   return (
@@ -61,6 +58,23 @@ export default function Home() {
         handleSearch={handleSearch}
       />
       <CharacterList characters={characters} loading={loading} error={error} />
+      {!loading && nextUrl !== null && nextUrl.length > 0 && (
+        <button
+          onClick={() =>
+            handleSearchMore(
+              nextUrl,
+              characters,
+              setCharacters,
+              setLoading,
+              setError,
+              setNextUrl
+            )
+          }
+          className="text-yellow-500 font-bak"
+        >
+          Fetch more
+        </button>
+      )}
     </>
   );
 }
