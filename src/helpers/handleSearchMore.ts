@@ -12,8 +12,9 @@ const handleSearchMore = async (
   setNextUrl: Dispatch<SetStateAction<string>>
 ) => {
   if (url === null) return;
+
   setLoading(true);
-  console.log("im in");
+
   try {
     const response = await fetch(url);
 
