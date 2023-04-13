@@ -12,7 +12,7 @@ const CharacterItem = ({ character }: CharacterItemProps) => (
       <span className="p-3 flex justify-between rounded-t-md bg-black shadow-[inset_0_30px_40px_rgba(255,255,255,0.167)] text-yellow-500 text-xl tracking-wider">
         {character.name}
       </span>
-      <div className="grow flex flex-col justify-center">
+      <div className="grow flex flex-col justify-center text-white">
         <div className="px-3 mb-1 flex justify-between">
           <span>Origin</span>
           <span className="underline underline-offset-2">

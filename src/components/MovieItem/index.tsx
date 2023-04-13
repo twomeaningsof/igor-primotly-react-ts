@@ -10,10 +10,10 @@ const MovieItem = ({ movie }: MovieItemProps) => (
       <span className="rounded-t-md text-yellow-500 text-xl tracking-wider ">
         {movie.title}
       </span>
-      <span>{movie.release_date}</span>
+      <span className="text-white">{movie.release_date}</span>
     </div>
     <div className="mt-4 px-3 flex flex-col items-center">
-      <span>Opening Crawl</span>
+      <span className="text-white">Opening Crawl</span>
       <p className="mt-2 text-center text-yellow-500">{movie.opening_crawl}</p>
     </div>
   </li>
