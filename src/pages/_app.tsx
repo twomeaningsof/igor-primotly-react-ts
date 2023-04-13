@@ -17,7 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="color-scheme" content="only light" />
       </Head>
       <main
-        className={`${bakbakOne.variable} min-h-screen p-10 flex flex-col items-center bg-starry-night bg-center`}
+        className={`${bakbakOne.variable} min-h-screen p-10 flex flex-col items-center bg-starry-night bg-center scroll-smooth`}
       >
         <Component {...pageProps} />
       </main>

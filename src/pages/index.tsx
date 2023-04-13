@@ -50,6 +50,10 @@ export default function Home() {
     handleInitialSearch(setCharacters, setLoading, setError, setNextUrl);
   }, []);
 
+  useEffect(() => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }, [characters]);
+
   return (
     <>
       <SearchInput
