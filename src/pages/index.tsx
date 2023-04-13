@@ -51,7 +51,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (nextUrl.includes("page=2")) return;
+    if (nextUrl === null || nextUrl.includes("page=2")) return;
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   }, [nextUrl, characters]);
 
